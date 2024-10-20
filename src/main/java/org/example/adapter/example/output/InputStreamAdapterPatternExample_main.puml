@@ -1,0 +1,19 @@
+@startuml
+participant Actor
+Actor -> InputStreamAdapterPatternExample : main
+activate InputStreamAdapterPatternExample
+create ByteToTextAdapter
+InputStreamAdapterPatternExample -> ByteToTextAdapter : new
+activate ByteToTextAdapter
+ByteToTextAdapter --> InputStreamAdapterPatternExample
+deactivate ByteToTextAdapter
+InputStreamAdapterPatternExample -> TextReader : readText
+activate TextReader
+TextReader -> ByteToTextAdapter : readText
+activate ByteToTextAdapter
+ByteToTextAdapter --> TextReader
+deactivate ByteToTextAdapter
+TextReader --> InputStreamAdapterPatternExample
+deactivate TextReader
+return
+@enduml
