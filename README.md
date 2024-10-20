@@ -4,6 +4,10 @@ https://capgemini.udemy.com/course/design-patterns-in-java-concepts-hands-on-pro
 
 
 ### Adapter Pattern
+Example code
+![image](https://github.com/user-attachments/assets/e5afbecd-129d-4ec8-a621-7e69fa1c4fdc)
+
+### Java Example
 ![image](https://github.com/user-attachments/assets/407782dd-141f-4192-99a7-ef58f3874bd2)
 
 Here’s an example of how the **Adapter Pattern** can be implemented using `InputStreamReader` in a real-world scenario, complete with the components of the pattern and comments to clarify how they relate to the Adapter Pattern.

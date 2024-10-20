@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+class Client {
+}
+
+interface Target {
+    + operation() : void
+}
+
+class Adapter {
+    + operation() : void
+}
+note right
+Operation
+adaptee.myOperation()
+endnote
+
+class Adaptee {
+    + myOperation() : void
+}
+
+Client --> Target
+Adapter ..|> Target
+Adapter *--> Adaptee
+
+@enduml
