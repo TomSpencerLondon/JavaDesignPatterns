@@ -110,3 +110,146 @@ classDiagram
     %% Realization: ClassA ..|> InterfaceB
 %%
 ```
+#### Java Examples
+- Collections.newSetFromMap()
+- java.sql.Driver
+
+## Decorator Design Pattern
+```mermaid
+classDiagram
+    direction TB
+
+%% Component Interface
+    class Component {
+        + operation(): void
+    }
+
+%% Concrete Component
+    class ConcreteComponent {
+        + operation(): void
+    }
+
+%% Decorator
+    class Decorator {
+        - Component component
+        + Decorator(Component component)
+        + operation(): void
+    }
+
+%% Concrete Decorators
+    class ConcreteDecoratorA {
+        + operation(): void
+    }
+
+    class ConcreteDecoratorB {
+        + operation(): void
+    }
+
+%% Relationships
+    Component <|-- ConcreteComponent
+    Component <|-- Decorator
+    Decorator *-- Component
+    Decorator <|-- ConcreteDecoratorA
+    Decorator <|-- ConcreteDecoratorB
+
+```
+
+Implementation
+```mermaid
+classDiagram
+direction TB
+class Base64EncodedMessage {
+  - Message msg
+  + getContent() String
+}
+class Client {
+  + main(String[]) void
+}
+class HtmlEncodedMessage {
+  - Message msg
+  + getContent() String
+}
+class Message {
+<<Interface>>
+  + getContent() String
+}
+class TextMessage {
+  - String msg
+  + getContent() String
+}
+
+Base64EncodedMessage  ..>  Message 
+Base64EncodedMessage "1" *--> "msg 1" Message 
+Client  ..>  Base64EncodedMessage : «create»
+Client  ..>  HtmlEncodedMessage : «create»
+Client  ..>  TextMessage : «create»
+HtmlEncodedMessage  ..>  Message 
+HtmlEncodedMessage "1" *--> "msg 1" Message 
+TextMessage  ..>  Message
+
+%% Inheritance: ClassA --|> ClassB
+%% Composition: ClassA *-- ClassB
+%% Aggregation: ClassA o-- ClassB
+%% Association: ClassA -- ClassB
+%% Dependency: ClassA ..> ClassB
+%% Realization: ClassA ..|> InterfaceB
+
+```
+
+Java examples
+- java.io.OutputStream
+
+```java
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+
+class Example {
+    public static void main(String[] args) {
+        try(OutputStream os = new BufferedOutputStream(new FileOutputStream("xfiles_mulder_notes.txt"))) {
+            os.write('x');
+            os.flush();
+
+        }
+    }    
+}
+
+```
+
+### Composite Design Pattern
+```mermaid
+classDiagram
+    direction TB
+
+    %% Component
+    class Component {
+        + operation(): void
+    }
+
+    %% Leaf
+    class Leaf {
+        + operation(): void
+    }
+
+    %% Composite
+    class Composite {
+        - children: List<Component>
+        + operation(): void
+        + add(child: Component): void
+        + remove(child: Component): void
+    }
+
+    %% Relationships
+    Component <|-- Leaf
+    Component <|-- Composite
+    Composite *-- Leaf
+
+    %% Client
+    class Client {
+        + clientOperation(Component component): void
+    }
+
+    %% Dependency
+    Client ..> Component
+
+
+```
