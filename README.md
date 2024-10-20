@@ -26,7 +26,7 @@ class Employee {
 + myOperation() void
 }
 
-BusinessCardDesigner --> Customer
+BusinessCardDesigner ..> Customer
 EmployeeAdapter ..|> Customer
 EmployeeAdapter *--> Employee
 ```
@@ -62,20 +62,23 @@ public class Main {
 ### Bridge Design Pattern
 ```mermaid
 classDiagram
-    direction LR
-
-    %% Abstraction
-    class Abstraction {
-        - Implementor implementor
-        + Abstraction(Implementor implementor)
-        + operation(): void
+    class Client {
     }
 
-    %% Refined Abstraction
+    direction LR
+    
+    class Abstraction {
+    - Implementor implementor
+    + Abstraction(Implementor implementor)
+    + operation(): void
+    }
+
+
+    %% Refined Abstraction directly below Abstraction
     class RefinedAbstraction {
         + operation(): void
     }
-
+    
     %% Implementor
     class Implementor {
         + implementation(): void
@@ -90,10 +93,20 @@ classDiagram
         + implementation(): void
     }
 
-    %% Relationships
-    Abstraction <|-- RefinedAbstraction
-    Abstraction --> Implementor
+    %% Depends
+    Client ..> Abstraction
+    %% Inheritance
+    RefinedAbstraction --|> Abstraction
+    %% Composition
+    Abstraction *--> Implementor
     Implementor <|-- ConcreteImplementorA
     Implementor <|-- ConcreteImplementorB
-
+    
+    %% Inheritance: ClassA --|> ClassB
+    %% Composition: ClassA *-- ClassB
+    %% Aggregation: ClassA o-- ClassB
+    %% Association: ClassA -- ClassB
+    %% Dependency: ClassA ..> ClassB
+    %% Realization: ClassA ..|> InterfaceB
+%%
 ```
