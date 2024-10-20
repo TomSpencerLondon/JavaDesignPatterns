@@ -10,10 +10,16 @@ public class Main {
 		String card = designer.designCard(adapter);
 
 		System.out.println(card);
-		
-		
-		/** Using Object Adapter **/
-		
+
+
+		System.out.println("******************");
+
+		Employee employee = new Employee();
+		populateEmployeeData(employee);
+		EmployeeObjectAdapter objectAdapter = new EmployeeObjectAdapter(employee);
+		String objectCard = designer.designCard(objectAdapter);
+		System.out.println(objectCard);
+
 	}
 
 	private static void populateEmployeeData(Employee employee) {

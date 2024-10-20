@@ -1,13 +1,11 @@
 package org.example.adapter.before;
 
-import org.example.adapter.after.Employee;
-
 /**
  * An object adapter. Using composition to translate interface
  */
 public class EmployeeObjectAdapter implements Customer {
 
-    private Employee adaptee;
+    private final Employee adaptee;
 
     public EmployeeObjectAdapter(Employee adaptee) {
         this.adaptee = adaptee;
