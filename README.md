@@ -58,3 +58,42 @@ public class Main {
 	}
 }
 ```
+
+### Bridge Design Pattern
+```mermaid
+classDiagram
+    direction LR
+
+    %% Abstraction
+    class Abstraction {
+        - Implementor implementor
+        + Abstraction(Implementor implementor)
+        + operation(): void
+    }
+
+    %% Refined Abstraction
+    class RefinedAbstraction {
+        + operation(): void
+    }
+
+    %% Implementor
+    class Implementor {
+        + implementation(): void
+    }
+
+    %% Concrete Implementors
+    class ConcreteImplementorA {
+        + implementation(): void
+    }
+
+    class ConcreteImplementorB {
+        + implementation(): void
+    }
+
+    %% Relationships
+    Abstraction <|-- RefinedAbstraction
+    Abstraction --> Implementor
+    Implementor <|-- ConcreteImplementorA
+    Implementor <|-- ConcreteImplementorB
+
+```
