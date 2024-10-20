@@ -253,3 +253,53 @@ classDiagram
 
 
 ```
+Example code
+```mermaid
+classDiagram
+    direction TB
+
+    %% BinaryFile Class
+    class BinaryFile {
+        - size: long
+        + addFile(File): void
+        + ls(): void
+        + removeFile(File): boolean
+        + getFiles(): File[]
+    }
+
+    %% Client Class
+    class Client {
+        + main(String[]): void
+        - createTreeOne(): File
+        - createTreeTwo(): File
+    }
+
+    %% Directory Class
+    class Directory {
+        - children: List<File>
+        + addFile(File): void
+        + removeFile(File): boolean
+        + getFiles(): File[]
+        + ls(): void
+    }
+
+    %% File Class
+    class File {
+        - name: String
+        + ls(): void
+        + removeFile(File): boolean
+        + setName(String): void
+        + getFiles(): File[]
+        + getName(): String
+        + addFile(File): void
+    }
+
+    %% Relationships
+    BinaryFile <|-- File
+    Client ..> BinaryFile : "«create»"
+    Client ..> Directory : "«create»"
+    Directory <|-- File
+    Directory "1" *-- "children\n*" File
+    Directory ..> File : "«create»"
+
+```
