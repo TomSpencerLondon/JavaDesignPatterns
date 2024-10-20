@@ -1,4 +1,4 @@
-package org.example.adapter.example;
+package org.example.adapter.example.input;
 
 import java.io.*;
 
@@ -6,7 +6,9 @@ import java.io.*;
 class ByteStreamSource {
     public InputStream getByteStream() throws FileNotFoundException {
         // Return a byte stream (from a file in this case)
-        return new FileInputStream("example.txt");
+        File inputFile = new File("./src/main/java/org/example/adapter/example/input/input.txt");
+
+        return new FileInputStream(inputFile);
     }
 }
 
@@ -39,7 +41,7 @@ class ByteToTextAdapter implements TextReader {
 }
 
 // Client: Uses the target interface (TextReader) and expects character input
-public class AdapterPatternExample {
+public class InputStreamAdapterPatternExample {
     public static void main(String[] args) {
         try {
             // Adaptee: ByteStreamSource provides a byte stream
