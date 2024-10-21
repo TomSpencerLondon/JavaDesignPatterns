@@ -303,3 +303,119 @@ classDiagram
     Directory ..> File : "«create»"
 
 ```
+
+### Facade Pattern
+
+```mermaid
+classDiagram
+    direction LR
+
+    %% Facade class
+    class Facade {
+        + operationA(): void
+        + operationB(): void
+    }
+
+    %% Subsystem classes
+    class Subsystem1 {
+        + operation1(): void
+    }
+
+    class Subsystem2 {
+        + operation2(): void
+    }
+
+    class Subsystem3 {
+        + operation3(): void
+    }
+
+    %% Relationships
+    Facade --> Subsystem1 : uses
+    Facade --> Subsystem2 : uses
+    Facade --> Subsystem3 : uses
+
+```
+Example:
+- java.net.URL
+  - openStream()
+
+### Proxy Design Pattern
+```mermaid
+classDiagram
+    direction TB
+    
+    class Client {
+    }
+
+    %% Subject Interface
+    class Subject {
+      <<Interface>>
+      + request(): void
+    }
+
+    %% RealSubject Class
+    class RealSubject {
+        + request(): void
+    }
+
+    %% Proxy Class
+    class Proxy {
+        - realSubject: RealSubject
+        + request(): void
+    }
+
+    %% Relationships
+    Client ..> Subject
+    Subject <|-- RealSubject
+    Subject <|-- Proxy
+    Proxy *-- RealSubject
+
+    %% Comments
+    %% Inheritance: ClassA --|> ClassB
+    %% Realization: ClassA ..|> InterfaceB
+    %% Composition: ClassA *-- ClassB
+    %% Aggregation: ClassA o-- ClassB
+    %% Dependency: ClassA ..> ClassB
+    %% Association: ClassA -- ClassB
+
+```
+
+## Behavioral Design Patterns
+
+### Chain of Responsibility
+```mermaid
+classDiagram
+    direction LR
+
+    %% Handler Interface
+    class Handler {
+        + handleRequest(request: Request): void
+        + setNext(handler: Handler): void
+    }
+
+    %% Concrete Handlers
+    class ConcreteHandler1 {
+        + handleRequest(request: Request): void
+    }
+
+    class ConcreteHandler2 {
+        + handleRequest(request: Request): void
+    }
+
+    class ConcreteHandler3 {
+        + handleRequest(request: Request): void
+    }
+
+    %% Request class
+    class Request {
+        + getRequestType(): String
+    }
+
+    %% Relationships
+    Request ..> Handler
+    Handler <|.. ConcreteHandler1
+    Handler <|.. ConcreteHandler2
+    Handler <|.. ConcreteHandler3
+    Handler o--> Handler : "next"
+
+```
