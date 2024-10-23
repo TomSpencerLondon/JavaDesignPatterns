@@ -196,6 +196,50 @@ TextMessage  ..>  Message
 
 ```
 
+### Another Decorator pattern example
+```mermaid
+classDiagram
+direction TB
+class Chocolates {
+  + deliverFlowers() String
+}
+class ChocolateswithRibbons {
+  + deliverFlowers() String
+}
+class DecorateRosesWithRibbons {
+  + deliverFlowers() String
+}
+class DecoratorpatternApplication {
+  + run(String[]) void
+  + main(String[]) void
+}
+class IBouquet {
+<<Interface>>
+  + deliverFlowers() String
+}
+class RibbonsOnRoses {
+  + deliverFlowers() String
+}
+class Roses {
+  + deliverFlowers() String
+}
+class Tulips {
+  + deliverFlowers() String
+}
+
+Chocolates  ..>  IBouquet 
+Chocolates "1" *--> "roses 1" Roses 
+ChocolateswithRibbons "1" *--> "decorateRosesWithRibbons 1" DecorateRosesWithRibbons 
+ChocolateswithRibbons  ..>  IBouquet 
+DecorateRosesWithRibbons  ..>  IBouquet 
+DecorateRosesWithRibbons "1" *--> "bouquet 1" IBouquet 
+DecoratorpatternApplication "1" *--> "bouquet 1" IBouquet 
+RibbonsOnRoses  -->  Roses 
+Roses  ..>  IBouquet 
+Tulips  ..>  IBouquet 
+
+```
+
 Java examples
 - java.io.OutputStream
 
@@ -417,5 +461,61 @@ classDiagram
     Handler <|.. ConcreteHandler2
     Handler <|.. ConcreteHandler3
     Handler o--> Handler : "next"
+
+```
+
+### Command Pattern
+
+```mermaid
+classDiagram
+    %% Command Interface
+    class Command {
+      +execute()
+    }
+
+    %% Concrete Commands
+    class ConcreteCommandA {
+      -receiver : Receiver
+      +execute()
+    }
+    
+    class ConcreteCommandB {
+      -receiver : Receiver
+      +execute()
+    }
+
+    %% Receiver Class
+    class Receiver {
+      +actionA()
+      +actionB()
+    }
+
+    %% Invoker Class
+    class Invoker {
+      -command : Command
+      +setCommand(Command)
+      +executeCommand()
+    }
+
+    %% Client Class
+    class Client {
+      +main()
+    }
+
+    %% Associations
+    Command <|-- ConcreteCommandA
+    Command <|-- ConcreteCommandB
+    ConcreteCommandA --> Receiver
+    ConcreteCommandB --> Receiver
+    Invoker --> Command
+    Client --> Invoker
+
+    %% Descriptions
+    Command : Interface for executing operations
+    ConcreteCommandA : Binds receiver to action A
+    ConcreteCommandB : Binds receiver to action B
+    Receiver : Knows how to perform the action
+    Invoker : Asks the command to carry out the request
+    Client : Creates and configures the command objects
 
 ```
