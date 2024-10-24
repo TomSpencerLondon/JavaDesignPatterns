@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //A concrete subject
-public class Order {
+public class Order implements Observable {
 
     private String id;
 

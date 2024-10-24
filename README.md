@@ -680,3 +680,77 @@ classDiagram
     ConcreteObserverB : Updates based on subject's state
 
 ```
+
+### State Pattern
+
+```mermaid
+classDiagram
+    %% Context Class
+    class Context {
+      -state : State
+      +setState(State)
+      +request()
+    }
+
+    %% State Interface
+    class State {
+      +handle(Context)
+    }
+
+    %% Concrete State A
+    class ConcreteStateA {
+      +handle(Context)
+    }
+
+    %% Concrete State B
+    class ConcreteStateB {
+      +handle(Context)
+    }
+
+    %% Associations
+    Context --> State : delegates to
+    State <|-- ConcreteStateA
+    State <|-- ConcreteStateB
+
+    %% Descriptions
+    Context : Maintains current state and changes behavior based on state
+    State : Interface declaring the handle() method
+    ConcreteStateA : Implements state-specific behavior
+    ConcreteStateB : Implements state-specific behavior
+
+```
+
+### Strategy Pattern
+
+```mermaid
+classDiagram
+    direction LR
+    class Context {
+        -Strategy strategy
+        +setStrategy(Strategy strategy)
+        +executeStrategy()
+    }
+
+    class Strategy {
+        <<interface>>
+        +execute()
+    }
+
+    class ConcreteStrategyA {
+        +execute()
+    }
+
+    class ConcreteStrategyB {
+        +execute()
+    }
+
+    class ConcreteStrategyC {
+        +execute()
+    }
+
+    Context --> Strategy : "uses"
+    Strategy <|-- ConcreteStrategyA
+    Strategy <|-- ConcreteStrategyB
+    Strategy <|-- ConcreteStrategyC
+
+```
