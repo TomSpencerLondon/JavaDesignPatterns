@@ -519,3 +519,164 @@ classDiagram
     Client : Creates and configures the command objects
 
 ```
+
+### Interpreter design pattern
+
+```mermaid
+classDiagram
+    class Context {
+        +lookup(String key) : Any
+        +assign(Expression exp, Any value)
+    }
+    
+    class AbstractExpression {
+        <<interface>>
+        +interpret(Context context) : Any
+    }
+    
+    class TerminalExpression {
+        +interpret(Context context) : Any
+    }
+
+    class NonTerminalExpression {
+        +interpret(Context context) : Any
+    }
+
+    Context -- AbstractExpression
+    AbstractExpression <|-- TerminalExpression
+    AbstractExpression <|-- NonTerminalExpression
+    
+    class Client {
+        +context : Context
+        +expressions : List~AbstractExpression~
+        +interpret() : Any
+    }
+
+    Client --> AbstractExpression : interprets
+
+
+```
+
+### Iterator pattern
+
+```mermaid
+classDiagram
+    class Iterator {
+        <<interface>>
+        +hasNext() bool
+        +next() Object
+    }
+    
+    class ConcreteIterator {
+        -collection : ConcreteCollection
+        -index : int
+        +hasNext() bool
+        +next() Object
+    }
+
+    class Aggregate {
+        <<interface>>
+        +createIterator() Iterator
+    }
+
+    class ConcreteCollection {
+        -items : List~Object~
+        +createIterator() Iterator
+        +addItem(Object item)
+        +getItem(int index) Object
+        +getSize() int
+    }
+
+    Iterator <|-- ConcreteIterator
+    Aggregate <|-- ConcreteCollection
+    ConcreteIterator --> ConcreteCollection : accesses
+```
+
+### Memento Pattern
+
+```mermaid
+classDiagram
+    %% Originator Class
+    class Originator {
+      -state : String
+      +setState(String)
+      +getState() : String
+      +saveState() : Memento
+      +restoreState(memento: Memento)
+    }
+
+    %% Memento Class
+    class Memento {
+      -state : String
+      +getState() : String
+    }
+
+    %% Caretaker Class
+    class Caretaker {
+      -mementoList : List~Memento~
+      +addMemento(Memento)
+      +getMemento(index: int) : Memento
+    }
+
+    %% Associations
+    Originator --> Memento : Creates
+    Caretaker --> Memento : Stores
+    Originator --> Caretaker : Uses
+
+    %% Descriptions
+    Originator : Creates and stores states inside Memento
+    Memento : Stores internal state of the Originator
+    Caretaker : Maintains the history of Mementos
+
+```
+
+### Observer Pattern
+
+```mermaid
+classDiagram
+    %% Subject Interface
+    class Subject {
+      +attach(Observer)
+      +detach(Observer)
+      +notify()
+    }
+
+    %% Concrete Subject
+    class ConcreteSubject {
+      -state : String
+      +getState() : String
+      +setState(String)
+    }
+
+    %% Observer Interface
+    class Observer {
+      +update()
+    }
+
+    %% Concrete Observer
+    class ConcreteObserverA {
+      -subject : ConcreteSubject
+      +update()
+    }
+    
+    class ConcreteObserverB {
+      -subject : ConcreteSubject
+      +update()
+    }
+
+    %% Associations
+    Subject <|-- ConcreteSubject
+    Observer <|-- ConcreteObserverA
+    Observer <|-- ConcreteObserverB
+    ConcreteSubject --> Observer : notifies
+    ConcreteObserverA --> ConcreteSubject : observes
+    ConcreteObserverB --> ConcreteSubject : observes
+
+    %% Descriptions
+    Subject : Maintains list of observers and notifies them of changes
+    ConcreteSubject : Has state that changes and notifies observers
+    Observer : Interface with update() method
+    ConcreteObserverA : Updates based on subject's state
+    ConcreteObserverB : Updates based on subject's state
+
+```
