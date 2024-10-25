@@ -788,3 +788,49 @@ classDiagram
     ConcreteClassB : +primitiveOperation2()
 
 ```
+
+### Visitor Design Pattern
+
+```mermaid
+classDiagram
+    direction LR
+
+    class Visitor {
+        <<interface>>
+        +visitConcreteElementA(element: ConcreteElementA): void
+        +visitConcreteElementB(element: ConcreteElementB): void
+    }
+
+    class ConcreteVisitorA {
+        +visitConcreteElementA(element: ConcreteElementA): void
+        +visitConcreteElementB(element: ConcreteElementB): void
+    }
+
+    class ConcreteVisitorB {
+        +visitConcreteElementA(element: ConcreteElementA): void
+        +visitConcreteElementB(element: ConcreteElementB): void
+    }
+
+    class Element {
+        <<interface>>
+        +accept(visitor: Visitor): void
+    }
+
+    class ConcreteElementA {
+        +accept(visitor: Visitor): void
+        +operationA(): void
+    }
+
+    class ConcreteElementB {
+        +accept(visitor: Visitor): void
+        +operationB(): void
+    }
+
+    Visitor <|-- ConcreteVisitorA
+    Visitor <|-- ConcreteVisitorB
+    Element <|-- ConcreteElementA
+    Element <|-- ConcreteElementB
+    ConcreteElementA --> Visitor : "accept(visitor)"
+    ConcreteElementB --> Visitor : "accept(visitor)"
+
+```
