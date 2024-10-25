@@ -834,3 +834,29 @@ classDiagram
     ConcreteElementB --> Visitor : "accept(visitor)"
 
 ```
+
+### Null Object
+
+```mermaid
+classDiagram
+    direction LR
+
+    class AbstractObject {
+        <<interface>>
+        +doSomething(): void
+    }
+
+    class RealObject {
+        +doSomething(): void
+    }
+
+    class NullObject {
+        +doSomething(): void
+    }
+
+    AbstractObject <|-- RealObject
+    AbstractObject <|-- NullObject
+
+    Client --> AbstractObject : uses
+
+```
