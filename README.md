@@ -754,3 +754,37 @@ classDiagram
     Strategy <|-- ConcreteStrategyC
 
 ```
+
+### Template Method Pattern
+
+```mermaid
+classDiagram
+    direction LR
+    class AbstractClass {
+        +templateMethod(): void
+        #primitiveOperation1(): void
+        #primitiveOperation2(): void
+    }
+
+    class ConcreteClassA {
+        +primitiveOperation1(): void
+        +primitiveOperation2(): void
+    }
+
+    class ConcreteClassB {
+        +primitiveOperation1(): void
+        +primitiveOperation2(): void
+    }
+
+    AbstractClass <|-- ConcreteClassA
+    AbstractClass <|-- ConcreteClassB
+
+    AbstractClass : +templateMethod() calls
+    AbstractClass : #primitiveOperation1()
+    AbstractClass : #primitiveOperation2()
+    ConcreteClassA : +primitiveOperation1()
+    ConcreteClassA : +primitiveOperation2()
+    ConcreteClassB : +primitiveOperation1()
+    ConcreteClassB : +primitiveOperation2()
+
+```
