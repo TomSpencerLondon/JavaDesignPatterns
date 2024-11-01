@@ -1,6 +1,5 @@
 package org.example.creational.factorymethod.begin;
 
-import com.coffeepoweredcrew.factorymethod.message.Message;
 
 public class Client {
 

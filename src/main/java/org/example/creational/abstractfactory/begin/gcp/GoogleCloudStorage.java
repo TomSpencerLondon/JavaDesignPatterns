@@ -1,6 +1,7 @@
 package org.example.creational.abstractfactory.begin.gcp;
 
-import com.coffeepoweredcrew.abstractfactory2.Storage;
+
+import org.example.creational.abstractfactory.begin.Storage;
 
 //Represents a concrete product in a family "Google Cloud Platform"
 public class GoogleCloudStorage implements Storage {
